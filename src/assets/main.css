@@ -1,0 +1,16 @@
+@font-face { font-family: JetBrains;
+    src: url('https://fonts.googleapis.coma/css?family=JetBrains Mono'); }
+
+*{
+    font-family: 'JetBrains Mono', monospace;
+    padding: 0;
+    margin: 0;
+}
+
+.purple-color{
+    color: #8085FF;
+}
+
+body{
+    background-color: #262626;
+}
