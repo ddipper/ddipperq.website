@@ -11,6 +11,14 @@
     color: #8085FF;
 }
 
+.orange-color{
+    color: #FFA680;
+}
+
 body{
     background-color: #262626;
+}
+
+button{
+    color: #FFFFFF;
 }
