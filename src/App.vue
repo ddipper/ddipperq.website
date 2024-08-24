@@ -30,6 +30,22 @@ export default {
     return {
       header,
       bodyContentHeight,
+      circles: Array.from({ length: 35 }, (_, id) => {
+        const size = Math.random() * 300 + 75;
+        const colors = ['#FFA680', '#8085FF', '#74D483'];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        return {
+          id,
+          style: {
+            top: `${Math.random() * 100}vh`,
+            left: `${Math.random() * 100}vw`,
+            backgroundColor: color,
+            animationDuration: `${Math.random() * 15 + 10}s`,
+            width: `${size}px`,
+            height: `${size}px`
+          }
+        };
+      })
     };
   },
   mounted() {
@@ -41,16 +57,13 @@ export default {
   },
   data(){
     return{
-      pages: ['Home', 'About', 'Contact'],
+      pages: ['Home', 'About', 'Links'],
       formattedTime: '',
     }
   },
   methods: {
     isActive(route) {
       return this.$route.path === route;
-    },
-    getCurrentRouteName() {
-      return this.$route.name;
     },
     getFormattedTime() {
       const options = {
@@ -72,16 +85,17 @@ export default {
 </script>
 
 <template>
+  <div class="background">
+    <div v-for="circle in circles" :key="circle.id" :style="circle.style" class="circle"></div>
+  </div>
   <header ref="header">
     <div class="header-page-links">
       <router-link :to="{ name: 'Home' }" :class="{ active: isActive('/') }">home</router-link>
       <router-link :to="{ name: 'About' }" :class="{ active: isActive('/about') }">about</router-link>
-      <router-link :to="{ name: 'Contact' }" :class="{ active: isActive('/contact') }">contact</router-link>
+      <router-link :to="{ name: 'Links' }" :class="{ active: isActive('/links') }">links</router-link>
     </div>
     <div class="header-other-links">
-      <a href="http://localhost:8080">ip</a>
-      <h3><span class="purple-color">/</span></h3>
-      <a>???</a>
+      <a href="https://github.com/ddipper/ddipperq.website" target="_blank">source</a>
     </div>
     <div class="header-time">
       <h3><span class="orange-color">time:</span> {{ formattedTime }}</h3>
@@ -109,7 +123,7 @@ export default {
   header{
     display: flex;
     justify-content: space-between;
-    padding: 12px 20px 8px 20px;
+    padding: 10px 20px 10px 20px;
     margin: 20px 20px 0 20px;
     border-radius: 10px;
     background-color: $header-color;
@@ -130,6 +144,7 @@ export default {
     .header-page-links{
       display: flex;
       gap: 20px;
+      width: 33%;
 
       .active {
         text-decoration: none;
@@ -141,12 +156,12 @@ export default {
     }
 
     .header-other-links{
-      display: flex;
-      gap: 5px;
-      h3{
-        margin-bottom: 3px;
-        font-weight: bold;
-      }
+      width: 33%;
+      text-align: center;
+    }
+    .header-time{
+      width: 33%;
+      text-align: right;
     }
   }
 
@@ -200,6 +215,33 @@ export default {
           margin-right: 60px;
         }
       }
+    }
+  }
+
+  .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+  }
+
+  .circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(70px);
+    opacity: 0.7;
+    animation: move 20s linear infinite;
+  }
+
+  @keyframes move {
+    0% {
+      transform: translate(-100vw, -100vh);
+    }
+    100% {
+      transform: translate(100vw, 100vh);
     }
   }
 

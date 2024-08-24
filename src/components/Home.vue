@@ -19,7 +19,6 @@ export default {
   },
   mounted() {
     this.printText();
-    this.getCurrentIndex();
   },
   methods: {
     printText() {
@@ -28,18 +27,15 @@ export default {
         if (text.currentIndex < text.fullText.length) {
           text.displayedText += text.fullText[text.currentIndex];
           text.currentIndex++;
-          setTimeout(this.printText.bind(this), 50);
+          setTimeout(this.printText.bind(this), 30);
         } else {
           this.currentTextIndex++;
           if (this.currentTextIndex < this.texts.length) {
-            setTimeout(this.printText.bind(this), 50);
+            setTimeout(this.printText.bind(this), 30);
           }
         }
       }
     },
-    getCurrentIndex(){
-      return this.currentTextIndex;
-    }
   }
 };
 </script>
@@ -75,8 +71,12 @@ export default {
     font-family: 'JetBrains Mono', monospace;
     font-weight: 400;
     font-size: 1.4rem;
-    padding: 34px 34px 0 34px;
+    padding: 17px 34px 0 34px;
     line-height: 1.6;
+
+    &:nth-child(2){
+      padding-top: 34px;
+    }
   }
 
   .blinking-cursor {

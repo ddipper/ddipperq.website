@@ -24,9 +24,9 @@ export default {
         { fullText: "/", displayedText: "", currentIndex: 0 },
         { fullText: "next", displayedText: "", currentIndex: 0 },
       ],
-      neededIndex: {"Home": 6, "About": 0, "Contact": 0},
+      neededIndex: {"Home": 6, "About": 17, "Links": 27},
       currentTextIndex: 0,
-      routes: ['/', '/about', '/contact'],
+      routes: ['/', '/about', '/links'],
       currentIndex: 0
     };
   },
@@ -51,11 +51,11 @@ export default {
         if (text.currentIndex < text.fullText.length) {
           text.displayedText += text.fullText[text.currentIndex];
           text.currentIndex++;
-          setTimeout(this.printText.bind(this), 50);
+          setTimeout(this.printText.bind(this), 30);
         } else {
           this.currentTextIndex++;
           if (this.currentTextIndex < this.texts.length) {
-            setTimeout(this.printText.bind(this), 50);
+            setTimeout(this.printText.bind(this), 30);
           }
         }
       }
@@ -74,7 +74,7 @@ export default {
   display: flex;
   gap: 6px;
   align-items: center;
-  padding: 34px 34px 0 34px;
+  padding: 17px 34px 0 34px;
 
   button{
     background-color: transparent;
