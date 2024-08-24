@@ -32,8 +32,41 @@ export default {
       bodyContentHeight,
     };
   },
+  mounted() {
+    this.updateTime();
+    setInterval(this.updateTime, 1000);
+  },
   components: {
     NavigationButtons
+  },
+  data(){
+    return{
+      pages: ['Home', 'About', 'Contact'],
+      formattedTime: '',
+    }
+  },
+  methods: {
+    isActive(route) {
+      return this.$route.path === route;
+    },
+    getCurrentRouteName() {
+      return this.$route.name;
+    },
+    getFormattedTime() {
+      const options = {
+        day: '2-digit',
+        month: 'short',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+      };
+      const now = new Date();
+      return now.toLocaleString('en-US', options).replace(',', '');
+    },
+    updateTime() {
+      this.formattedTime = this.getFormattedTime();
+    }
   }
 };
 </script>
@@ -41,17 +74,17 @@ export default {
 <template>
   <header ref="header">
     <div class="header-page-links">
-      <router-link :to="{ name: 'Home' }">home</router-link>
-      <router-link :to="{ name: 'About' }">about</router-link>
-      <router-link :to="{ name: 'Contact' }">contact</router-link>
+      <router-link :to="{ name: 'Home' }" :class="{ active: isActive('/') }">home</router-link>
+      <router-link :to="{ name: 'About' }" :class="{ active: isActive('/about') }">about</router-link>
+      <router-link :to="{ name: 'Contact' }" :class="{ active: isActive('/contact') }">contact</router-link>
     </div>
     <div class="header-other-links">
-      <a>ip</a>
+      <a href="http://localhost:8080">ip</a>
       <h3><span class="purple-color">/</span></h3>
       <a>???</a>
     </div>
     <div class="header-time">
-      <h3><span class="orange-color">time:</span> 11:10:09 PM</h3>
+      <h3><span class="orange-color">time:</span> {{ formattedTime }}</h3>
     </div>
   </header>
   <div class="body-content" :style="{ height: bodyContentHeight }">
@@ -62,11 +95,10 @@ export default {
           <div class="console-header-circle"></div>
           <div class="console-header-circle"></div>
         </div>
-        <h3 class="console-header-title">PAGE_TITLE</h3>
+        <h3 class="console-header-title">{{this.$route.name}}</h3>
       </div>
       <router-view>
       </router-view>
-      <NavigationButtons />
     </div>
   </div>
 </template>
@@ -98,6 +130,14 @@ export default {
     .header-page-links{
       display: flex;
       gap: 20px;
+
+      .active {
+        text-decoration: none;
+        color: $orange-color;
+        transition: ease-out .25s;
+        pointer-events: none;
+        cursor: none;
+      }
     }
 
     .header-other-links{
@@ -125,13 +165,14 @@ export default {
 
       .console-header{
         width: calc(100% - 32px);
-        padding: 16px;
+        padding: 7.6px 16px;
         background-color: $console-header-color;
         display: flex;
 
         .console-header-circles-group{
           display: flex;
           align-items: center;
+          justify-content: center;
           gap: 12px;
 
           .console-header-circle{

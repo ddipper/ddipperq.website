@@ -1,29 +1,71 @@
 <template>
   <div class="nav-buttons">
-    <button @click="prevPage">prev</button>
-    <h3 class="purple-color">/</h3>
-    <button @click="nextPage">next</button>
+    <button @click="prevPage">{{ texts[0].displayedText }}</button>
+    <h3 class="purple-color">{{texts[1].displayedText}}</h3>
+    <button @click="nextPage">{{ texts[2].displayedText }}</button>
+    <span v-if="currentTextIndexProps > neededIndex[this.$route.name]" class="blinking-cursor">|</span>
   </div>
 </template>
 
 <script>
 export default {
+  watch: {
+    currentTextIndexProps() {
+      this.printText();
+    }
+  },
+  props: {
+    currentTextIndexProps: Number
+  },
   data() {
     return {
-      pages: ['Home', 'About', 'Contact'],
+      texts: [
+        { fullText: "prev", displayedText: "", currentIndex: 0 },
+        { fullText: "/", displayedText: "", currentIndex: 0 },
+        { fullText: "next", displayedText: "", currentIndex: 0 },
+      ],
+      neededIndex: {"Home": 6, "About": 0, "Contact": 0},
+      currentTextIndex: 0,
+      routes: ['/', '/about', '/contact'],
       currentIndex: 0
     };
   },
   methods: {
+    updateCurrentIndex() {
+      this.currentIndex = this.routes.indexOf(this.$route.path);
+    },
     nextPage() {
-      this.currentIndex = (this.currentIndex + 1) % this.pages.length;
-      this.$router.push({ name: this.pages[this.currentIndex] });
+      this.updateCurrentIndex();
+      this.currentIndex = (this.currentIndex + 1) % this.routes.length;
+      this.$router.push({ path: this.routes[this.currentIndex] });
+      console.log(this.currentTextIndexProps);
     },
     prevPage() {
-      this.currentIndex = (this.currentIndex - 1 + this.pages.length) % this.pages.length;
-      this.$router.push({ name: this.pages[this.currentIndex] });
+      this.updateCurrentIndex();
+      this.currentIndex = (this.currentIndex - 1 + this.routes.length) % this.routes.length;
+      this.$router.push({ path: this.routes[this.currentIndex] });
+    },
+    printText() {
+      if (this.currentTextIndex < this.texts.length && this.currentTextIndexProps > this.neededIndex[this.$route.name] ) {
+        let text = this.texts[this.currentTextIndex];
+        if (text.currentIndex < text.fullText.length) {
+          text.displayedText += text.fullText[text.currentIndex];
+          text.currentIndex++;
+          setTimeout(this.printText.bind(this), 50);
+        } else {
+          this.currentTextIndex++;
+          if (this.currentTextIndex < this.texts.length) {
+            setTimeout(this.printText.bind(this), 50);
+          }
+        }
+      }
     }
+  },
+  mounted() {
+    this.updateCurrentIndex();
+    this.printText();
   }
+
 };
 </script>
 
@@ -32,6 +74,7 @@ export default {
   display: flex;
   gap: 6px;
   align-items: center;
+  padding: 34px 34px 0 34px;
 
   button{
     background-color: transparent;
@@ -40,6 +83,7 @@ export default {
     font-size: 1.4rem;
     font-weight: 400;
     text-decoration: underline;
+    line-height: 1.6;
 
     &:hover{
       cursor: pointer;
@@ -53,6 +97,22 @@ export default {
   h3{
     font-size: 1.4rem;
     font-weight: bold;
+  }
+}
+
+.blinking-cursor {
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: #FFFFFFFF;
+  animation: 0.75s blink step-end infinite;
+}
+
+@keyframes blink {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: #FFFFFFFF;
   }
 }
 </style>
