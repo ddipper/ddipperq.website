@@ -137,6 +137,9 @@ export default {
       font-size: 1.25rem;
     }
   }
+  .blinking-cursor {
+    font-size: 1.25rem;
+  }
 }
 
 @media all and (max-width: 850px){
@@ -146,6 +149,9 @@ export default {
       font-size: 1.15rem;
       line-height: 1.4;
     }
+  }
+  .blinking-cursor {
+    font-size: 1.15rem;
   }
 }
 </style>

@@ -29,7 +29,7 @@ export default {
     return {
       header,
       bodyContentHeight,
-      circles: Array.from({ length: 20 }, (_, id) => {
+      circles: Array.from({ length: 50 }, (_, id) => {
         const size = Math.random() * 300 + 75;
         const colors = ['#FFA680', '#8085FF', '#74D483'];
         const color = colors[Math.floor(Math.random() * colors.length)];
@@ -124,6 +124,7 @@ export default {
         <router-link :to="{ name: 'About' }" :class="{ active: isActive('/about') }" @click="toggleMenu">about</router-link>
         <router-link :to="{ name: 'Links' }" :class="{ active: isActive('/links') }" @click="toggleMenu">links</router-link>
         <a href="https://github.com/ddipper/ddipperq.website" target="_blank" @click="toggleMenu">source</a>
+        <h3>{{ formattedTime }}</h3>
       </div>
     </div>
   </transition>
@@ -351,7 +352,7 @@ export default {
         cursor: none;
       }
 
-      a, button{
+      a, button, h3{
         background: transparent;
         border: none;
         color: $text-color;
@@ -364,6 +365,9 @@ export default {
         &:hover{
           cursor: pointer;
         }
+      }
+      h3{
+        text-decoration: none;
       }
     }
   }

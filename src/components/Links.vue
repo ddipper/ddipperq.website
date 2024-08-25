@@ -178,6 +178,9 @@ export default {
         padding-top: 15px;
       }
     }
+    .blinking-cursor {
+      font-size: 1.25rem;
+    }
   }
 
   @media all and (max-width: 850px) {
@@ -193,6 +196,9 @@ export default {
       &:nth-child(11){
         padding-top: 15px;
       }
+    }
+    .blinking-cursor {
+      font-size: 1.15rem;
     }
   }
 </style>
