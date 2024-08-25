@@ -13,5 +13,5 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  publicPath: '/ddipperq.website/',
+  publicPath: '/ddipperq.website',
 })
