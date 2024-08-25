@@ -125,6 +125,17 @@ export default {
 
   a{
     color: $text-color;
+
+    &:hover{
+      cursor: pointer;
+      text-decoration: underline;
+      background: linear-gradient(270deg, #FFA680, #8085FF, #74D483);
+      background-size: 600% 600%;
+      background-clip: text;
+      color: transparent;
+      animation: gradientAnimation 5s ease infinite;
+      transition: .25s linear;
+    }
   }
 
   .blinking-cursor {
@@ -140,6 +151,48 @@ export default {
     }
     50% {
       color: $text-color;
+    }
+  }
+
+  @keyframes gradientAnimation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @media all and (max-width: 1340px) {
+    h3{
+      font-size: 1.25rem;
+      padding-left: 20px;
+
+      &:nth-child(2){
+        padding: 20px 0 15px 20px;
+      }
+      &:nth-child(11){
+        padding-top: 15px;
+      }
+    }
+  }
+
+  @media all and (max-width: 850px) {
+    h3{
+      font-size: 1.15rem;
+      padding-left: 15px;
+      line-height: 1.4;
+      text-align: justify;
+
+      &:nth-child(2){
+        padding: 15px 0 15px 15px;
+      }
+      &:nth-child(11){
+        padding-top: 15px;
+      }
     }
   }
 </style>

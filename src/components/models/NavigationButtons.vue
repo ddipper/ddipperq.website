@@ -87,11 +87,13 @@ export default {
 
     &:hover{
       cursor: pointer;
-      opacity: 0.3;
-      transition: .25s cubic-bezier(0,0,.2,1);
-    }
-    &:not(:hover){
-      transition: .25s cubic-bezier(0,0,.2,1);
+      text-decoration: underline;
+      background: linear-gradient(270deg, #FFA680, #8085FF, #74D483);
+      background-size: 600% 600%;
+      background-clip: text;
+      color: transparent;
+      animation: gradientAnimation 5s ease infinite;
+      transition: .25s linear;
     }
   }
   h3{
@@ -113,6 +115,37 @@ export default {
   }
   50% {
     color: #FFFFFFFF;
+  }
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@media all and (max-width: 1340px) {
+  .nav-buttons{
+    padding: 15px 20px 0 20px;
+    h3, button{
+      font-size: 1.25rem;
+    }
+  }
+}
+
+@media all and (max-width: 850px){
+  .nav-buttons{
+    padding: 15px 15px 0 15px;
+    h3, button{
+      font-size: 1.15rem;
+      line-height: 1.4;
+    }
   }
 }
 </style>

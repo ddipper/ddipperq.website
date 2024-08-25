@@ -73,6 +73,7 @@ export default {
     font-size: 1.4rem;
     padding: 17px 34px 0 34px;
     line-height: 1.6;
+    text-align: justify;
 
     &:nth-child(2){
       padding-top: 34px;
@@ -92,6 +93,35 @@ export default {
     }
     50% {
       color: $text-color;
+    }
+  }
+
+  @media all and (max-width: 1340px) {
+    h3{
+      font-size: 1.25rem;
+      padding: 0 20px 0 20px;
+
+      &:nth-child(2){
+        padding: 20px 20px 15px 20px;
+      }
+      &:nth-child(4){
+        padding-top: 15px;
+      }
+    }
+  }
+
+  @media all and (max-width: 850px){
+    h3{
+      font-size: 1.15rem;
+      padding: 0 15px 0 15px;
+      line-height: 1.4;
+
+      &:nth-child(2){
+        padding: 15px 15px 15px 15px;
+      }
+      &:nth-child(4){
+        padding-top: 15px;
+      }
     }
   }
 </style>

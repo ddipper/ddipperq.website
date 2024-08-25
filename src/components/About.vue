@@ -110,4 +110,35 @@ export default {
       color: $text-color;
     }
   }
+
+  @media all and (max-width: 1340px) {
+    h3{
+      font-size: 1.25rem;
+      padding: 0 20px;
+      text-align: justify;
+
+      &:nth-child(2){
+        padding: 20px 0 15px 20px;
+      }
+      &:nth-child(7){
+        padding-top: 15px;
+      }
+    }
+  }
+
+  @media all and (max-width: 850px) {
+    h3{
+      font-size: 1.15rem;
+      padding: 0 15px;
+      text-align: justify;
+      line-height: 1.4;
+
+      &:nth-child(2){
+        padding: 15px 0 15px 15px;
+      }
+      &:nth-child(7){
+        padding-top: 15px;
+      }
+    }
+  }
 </style>
